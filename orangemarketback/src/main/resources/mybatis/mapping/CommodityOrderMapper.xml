@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.orangeSoft.market.mapper.CommodityOrderMapper">
+    <select id="findOrderDetailByOrderId" resultType="com.orangeSoft.market.pojo.UserOrderDetailResult">
+        select commodity_order.order_id,
+               c.cid,
+               c.sid,
+               shop_name,
+               commodity_name,
+               sub_name,
+               price,
+               count_commodity,
+               address_details,
+               sub_icon,
+               logistics_name
+        from commodity_order
+                 inner join order_logistics ol on commodity_order.order_id = ol.order_id
+                 inner join logistics l on ol.logistics_id = l.logistics_id
+                 inner join receive_address ra on commodity_order.receive_address_id = ra.receive_address_id
+                 inner join shop s on commodity_order.sid = s.sid
+                 inner join sub_commodity sc on commodity_order.sub_id = sc.sub_id
+                 inner join commodity c on sc.cid = c.cid
+        where commodity_order.order_id = #{orderId}
+    </select>
+    <select id="findUserOrderByUserId" resultType="com.orangeSoft.market.pojo.UserOrderResult">
+        select commodity_order.order_id,
+               shop_name,
+               commodity_name,
+               sub_name,
+               price,
+               count_commodity,
+               dd.item_name,
+               sub_icon
+        from commodity_order
+                 inner join receive_address ra on commodity_order.receive_address_id = ra.receive_address_id
+                 inner join shop s on commodity_order.sid = s.sid
+                 inner join sub_commodity sc on commodity_order.sub_id = sc.sub_id
+                 inner join (select *
+                             from (select *
+                                   from order_stateflow
+                                   order by record_id desc) as tmp
+                             group by order_id) as os on commodity_order.order_id = os.order_id
+                 inner join data_dictionary dd on os.record_id = dd.record_id
+                 inner join commodity c on s.sid = c.sid
+        where commodity_order.uid = #{uid}
+        group by order_id
+        order by order_id DESC
+    </select>
+    <select id="findSidBySubId" resultType="int">
+        select co.sid
+        from sub_commodity
+                 inner join commodity co on sub_commodity.cid = co.cid
+        where sub_id = #{subId}
+    </select>
+    <select id="findShopOrderBySid" resultType="com.orangeSoft.market.pojo.ShopOrderResult">
+        select commodity_order.order_id,
+               user_name,
+               commodity_name,
+               sub_name,
+               price,
+               count_commodity,
+               address_details,
+               dd.item_name,
+               sub_icon
+        from commodity_order
+                 inner join receive_address ra on commodity_order.receive_address_id = ra.receive_address_id
+                 inner join shop s on commodity_order.sid = s.sid
+                 inner join sub_commodity sc on commodity_order.sub_id = sc.sub_id
+                 inner join (select *
+                             from (select *
+                                   from order_stateflow
+                                   order by record_id desc) as tmp
+                             group by order_id) as os on commodity_order.order_id = os.order_id
+                 inner join data_dictionary dd on os.record_id = dd.record_id
+                 inner join commodity c on s.sid = c.sid
+                 inner join user_info ui on commodity_order.uid = ui.uid
+        where commodity_order.sid = #{sid}
+        group by order_id
+        order by order_id DESC
+    </select>
+</mapper>

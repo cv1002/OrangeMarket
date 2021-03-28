@@ -1,0 +1,33 @@
+{
+  "typeDetail": [
+    {
+      "id": "1",
+      "name": "平价",
+      "imgUrl": "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3772363621,630429607&fm=26&gp=0.jpg",
+      "previewImgUrl": "https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=3772363621,630429607&fm=26&gp=0.jpg"
+    },
+    {
+      "id": "2",
+      "name": "精品",
+      "imgUrl": "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3196440353,380056155&fm=26&gp=0.jpg",
+      "previewImgUrl": "https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=3196440353,380056155&fm=26&gp=0.jpg"
+    }
+  ],
+  "typeList": [
+    {
+      "id": 2259,
+      "s1": "1",
+      "price": 1200,
+      "stock_num": 10
+    },
+    {
+      "id": 2260,
+      "s1": "2",
+      "price": 11451400,
+      "stock_num": 110
+    }
+  ],
+  "defaultPrice": 12,
+  "totalStock": 2000,
+  "goodsPictureSmall": "https://ss0.bdstatic.com/70cFvHSh_Q1YnxGkpoWK1HF6hhy/it/u=2046365783,1122475651&fm=26&gp=0.jpg"
+}

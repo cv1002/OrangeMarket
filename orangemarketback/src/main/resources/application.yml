@@ -1,0 +1,26 @@
+server:
+  port: 8081
+  http2:
+    enabled: true
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://192.168.101.84:3306/orangesoft?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+    username: orangesoft
+    password: orangesoft
+
+  thymeleaf:
+    cache: false # 禁用 thymeleaf 缓存
+  servlet:
+    multipart:
+      max-file-size: 20MB    # 上传文件最大为 20M
+      max-request-size: 20MB # 上传请求最大为 20M
+
+mybatis-plus:
+  type-aliases-package: com.orangeSoft.market.entity
+  mapper-locations: classpath:mybatis/mapping/*Mapper.xml
+
+logging:
+  level:
+    com.orangeSoft.market.mapper: debug  # 打印sql语句
